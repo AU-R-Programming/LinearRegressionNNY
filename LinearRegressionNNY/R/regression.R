@@ -1,5 +1,26 @@
-#Citation https://smac-group.github.io/ds/section-functions.html#section-example-continued-least-squares-function
-
+#' @title LinearRegressionNNY
+#'
+#' @description Simple function that computes a linear regression model.
+#' Citation https://smac-group.github.io/ds/section-functions.html#section-example-continued-least-squares-function
+#'
+#' @param response A \code{vector} representing the response variable.
+#' @param covariates A \code{matrix} representing the covariates.
+#' @param alpha The \code{numeric} value representing the significance level.
+#'
+#' @return A \code{list} containing :
+#' \describe{
+#'     \item{beta}{Estimated coefficient, beta hat}
+#'     \item{sigma2}{Residuals}
+#'     \item{variance_beta}{variance of the beta estimator, beta hat}
+#'     \item{ci}{confidence interval, derived from alpha}
+#' }
+#'
+#' @author Group 09 and SMAC Group: https://smac-group.github.io/ds/section-functions.html#section-example-continued-least-squares-function.
+#'
+#' @export
+#' @examples
+#' linear_model(cars$speed, cars$distance)
+#' linear_model(cars$speed, cars$distance, 0.025)
 linear_model = function(response, covariates, alpha = 0.05) {
 
   # Make sure data formats are appropriate
