@@ -3,7 +3,7 @@ Type: Package
 Title: Linear Reression Final Project - STAT6210
 Version: 0.1.0
 Authors@R: c(
-    person("Alex", "Norris", role = c("aut","cre")),
+    person("Alex", "Norris", email = "oan0003@auburn.edu", role = c("aut","cre")),
     person("Khanh", "Nguyen", role = "aut"),
     person("Nan", "Yang", role = "aut")
     )
