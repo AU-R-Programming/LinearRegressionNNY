@@ -8,45 +8,34 @@
 #
 
 library(shiny)
-#
-devtools::install_github("https://github.com/AU-R-Programming/LinearRegressionNNY")
+library(datasets)
 library(LinearRegressionNNY)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
-
-    # Application title
-    titlePanel("General Linear Regression"),
-
-    # Sidebar with a slider input for number of bins 
-    sidebarLayout(
-        sidebarPanel(
-            sliderInput("bins",
-                        "Number of bins:",
-                        min = 1,
-                        max = 50,
-                        value = 30)
-        ),
-
-        # Show a plot of the generated distribution
-        mainPanel(
-           plotOutput("distPlot")
-        )
-    )
+  headerPanel("General Linear Regression"),
+  sidebarPanel(
+    p("Select the inputs for the Dependent Variable"),
+    selectInput(inputId = "DepVar", label = "Dependent Variables", multiple = FALSE, choices = list("Speed", "Distance")),
+    p("Select the inputs for the Independent Variable"),
+    selectInput(inputId = "IndVar", label = "Independent Variables", multiple = FALSE, choices = list("Speed", "Distance"))
+  ),
+  mainPanel(
+    verbatimTextOutput(outputId = "RegSum"),
+    verbatimTextOutput(outputId = "IndPrint"),
+    verbatimTextOutput(outputId = "DepPrint"),
+    plotOutput("distPlot")
+  )
 )
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
-
-    output$distPlot <- renderPlot({
-        # generate bins based on input$bins from ui.R
-        x    <- faithful[, 2]
-        bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-        # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = 'darkgray', border = 'white')
-    })
+  model <- reactive({linear_model(cars$dist, cars$speed, alpha = 0.05)})
+  output$DepPrint <- renderPrint({input$DepVar})
+  output$IndPrint <- renderPrint({input$IndVar})
+  output$RegSum <- renderPrint({summary(model())})
+  output$distPlot <- renderPlot({plot(input$DepVar~input$IndVar)}) #If I change the plot using the cars data set then it works, but when I set the plot to take from the input then it showed errors
 }
-
-# Run the application 
+?renderPlot
+# Run the application
 shinyApp(ui = ui, server = server)
