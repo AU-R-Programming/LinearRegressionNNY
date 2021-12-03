@@ -13,6 +13,7 @@
 #'     \item{sigma2}{Residuals}
 #'     \item{variance_beta}{variance of the beta estimator, beta hat}
 #'     \item{ci}{confidence interval, derived from alpha}
+#'     \item{ggplot}{plot function}
 #' }
 #'
 #' @author Group 09 and SMAC Group: https://smac-group.github.io/ds/section-functions.html#section-example-continued-least-squares-function.
@@ -51,5 +52,19 @@ linear_model = function(response, covariates, alpha = 0.05) {
   # Return all estimated values
   return(list(beta = beta.hat, sigma2 = sigma2.hat,
               variance_beta = var.beta, ci = ci.beta))
+
+  # Residuals vs fitted-value
+  RF=data.frame(response,resid)
+  ggplot(data = RF,aes(response,resid))+
+  goem_point()+
+  goem_line()
+
+  # qqplot of residuals
+  qqplot(resid)
+  # histogram of residuals
+  hist(resid)
 }
+
+
+
 
