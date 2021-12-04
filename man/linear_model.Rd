@@ -2,7 +2,7 @@
 % Please edit documentation in R/regression.R
 \name{linear_model}
 \alias{linear_model}
-\title{LinearRegressionNNY}
+\title{Fit a linear model}
 \usage{
 linear_model(response, covariates, alpha = 0.05)
 }
@@ -17,19 +17,27 @@ linear_model(response, covariates, alpha = 0.05)
 A \code{list} containing :
 \describe{
     \item{beta}{Estimated coefficient, beta hat}
-    \item{sigma2}{Residuals}
-    \item{variance_beta}{variance of the beta estimator, beta hat}
+    \item{sigma2}{Residual variance (MSE)}
     \item{ci}{confidence interval, derived from alpha}
+    \item{resid}{residuals}
+    \item{fitted}{fitted values}
+    \item{r2}{R squared}
+    \item{cp}{Mallows' Cp}
+    \item{f}{F statistic}
+    \item{pval}{P-Value}
 }
 }
 \description{
 Simple function that computes a linear regression model.
-Citation https://smac-group.github.io/ds/section-functions.html#section-example-continued-least-squares-function
+Reference https://smac-group.github.io/ds/section-functions.html#section-example-continued-least-squares-function
 }
 \examples{
 linear_model(cars$speed, cars$distance)
 linear_model(cars$speed, cars$distance, 0.025)
 }
+\references{
+SMAC Group Book: https://smac-group.github.io/ds/section-functions.html#section-example-continued-least-squares-function.
+}
 \author{
-Group 09 and SMAC Group: https://smac-group.github.io/ds/section-functions.html#section-example-continued-least-squares-function.
+Group 09(Alex, Nan, Khanh - Stat 6210 Auburn Univ)
 }
