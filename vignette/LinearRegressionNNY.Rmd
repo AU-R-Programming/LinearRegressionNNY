@@ -1,0 +1,63 @@
+---
+title: "LinearRegressionNNY"
+author: "Alex Norris, Khanh Nguyen, Nan Yang"
+date: "Date of publish: `r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Linear Regression NNY allows you to perform the general linear regression models from a **independent** and **dependent** variables. It can be utilized for performing regression, t-test, and analysis of covariance. Citation https://smac-group.github.io/ds/section-functions.html#section-example-continued-least-squares-function
+
+## Install package
+
+The package can be installed by following
+
+devtools::install_github("https://github.com/AU-R-Programming/LinearRegressionNNY")
+
+## Load package
+
+```{r load_packge}
+library(LinearRegressionNNY)
+```
+
+## Getting help
+
+?linear_model
+
+## Usage
+
+linear_model(response, covariates, alpha = 0.05)
+
+
+## Value
+The result from object "linear_model" is a list containing at least the following components:
+
+**beta**: Estimated coefficient, beta hat
+
+**sigma2**: Residuals
+
+**variance_beta**: variance of the beta estimator, beta hat
+
+**ci**: confidence interval, derived from alpha
+
+## Authors
+
+Group 09 and SMAC Group: https://smac-group.github.io/ds/section-functions.html#section-example-continued-least-squares-function.
+
+## Example
+```{r use}
+data("cars")
+linearModel <- linear_model(cars$dist, cars$speed, alpha = 0.05)
+summary(linearModel)
+```
+
